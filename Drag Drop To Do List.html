@@ -41,7 +41,21 @@
       <div class="output_msg_style" id="output_msg">
         Add Items Above to Generate Message!
       </div>
-      <button id="copyResultText">COPY</button>
+      <button id="copyResultText">
+        COPY
+        <svg
+          display="none"
+          class="check_icon"
+          id="check_icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <title>check-circle</title>
+          <path
+            d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+          />
+        </svg>
+      </button>
     </div>
     <style>
       input[type="number"] {
@@ -56,6 +70,12 @@
       button {
         font-size: 2em;
         border-radius: 5%;
+      }
+
+      button:active,
+      button:hover {
+        border: solid;
+        color: green;
       }
       .bgstyle {
         background: rgb(186, 82, 82);
@@ -81,10 +101,26 @@
         gap: 1em;
         padding: 1em;
         overflow: hidden;
+        max-width: 100em;
       }
       @media (min-width: 40em) {
         .container {
-          grid-template-columns: 1fr 1fr 2fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+      }
+      .svg {
+        display: inline-block;
+        width: 30px;
+        fill: green;
+        vertical-align: middle;
+        animation: checkfadeout 3000ms ease-in forwards;
+      }
+      @keyframes checkfadeout {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
         }
       }
     </style>
@@ -167,6 +203,25 @@
       document
         .getElementById("item_unique_input")
         .addEventListener("input", getResult);
+
+      //check,tick icon
+
+      // document
+      //   .getElementById("copyResultText")
+      //   .addEventListener("click", () => {
+      //     document.getElementById("check_icon").classList.remove("svg");
+      //     console.log(document.getElementById("check_icon").classList);
+      //   });
+      document
+        .getElementById("copyResultText")
+        .addEventListener("click", addClass);
+
+      function addClass() {
+        document.getElementById("check_icon").classList.add("svg");
+        setTimeout(() => {
+          document.getElementById("check_icon").classList.remove("svg");
+        }, 3000);
+      }
 
       // Later, add drop down list for items options
     </script>
