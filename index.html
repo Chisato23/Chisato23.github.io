@@ -200,13 +200,14 @@
       document
         .getElementById("item_flex_input")
         .addEventListener("input", ev => {
-          item_flex_1_input = ev.target.value;
+          if (document.getElementById("item_flex").value === "Bath_Robe") {
+            item_flex_1_input = ev.target.value;
+          }
+          if (document.getElementById("item_flex").value === "Slippers") {
+            item_flex_2_input = ev.target.value;
+          }
         });
-      document
-        .getElementById("item_flex_input")
-        .addEventListener("input", ev => {
-          item_flex_2_input = ev.target.value;
-        });
+
       //
       document
         .getElementById("item_unique_input")
@@ -248,6 +249,7 @@
           }
         }
         console.log("resultARR:" + resultARR);
+        console.log(document.getElementById("item_flex").value);
 
         return Promise.all(setEle_innerHTML("output_msg", resultARR));
       }
@@ -261,7 +263,6 @@
       function copyResultText() {
         console.log(document.getElementById("output_msg").innerHTML);
         let msg = document.getElementById("output_msg").innerHTML;
-        // msg.select();
 
         navigator.clipboard.writeText(msg);
       }
