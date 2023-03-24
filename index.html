@@ -28,6 +28,41 @@
           id="item2_input"
         />
       </div>
+      <div class="bgstyle">
+        <article id="item3">Hand Towel</article>
+        <input
+          type="number"
+          min="1"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          id="item3_input"
+        />
+      </div>
+      <div class="bgstyle">
+        <article id="item4">Bath Mat</article>
+        <input
+          type="number"
+          min="1"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          id="item4_input"
+        />
+      </div>
+      <div class="bgstyle_flex">
+        <select id="item_flex" name="item_flex">
+          <optgroup label="">
+            <option id="item_flex_1" value="Bath_Robe">Bath Robe</option>
+            <option id="item_flex_2" value="Slippers">Slippers</option>
+          </optgroup>
+        </select>
+        <input
+          type="number"
+          min="1"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          id="item_flex_input"
+        />
+      </div>
       <div class="bgstyle_unique">
         <article id="item_unique">Room</article>
         <input
@@ -67,6 +102,9 @@
       article {
         font-size: 2em;
       }
+      select {
+        font-size: 2em;
+      }
       button {
         font-size: 2em;
         border-radius: 5%;
@@ -81,13 +119,19 @@
         background: rgb(186, 82, 82);
         padding: 1em;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
+      }
+      .bgstyle_flex {
+        background: rgb(194, 153, 3);
+        padding: 1em;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
       }
       .bgstyle_unique {
         background: rgb(118, 82, 186);
         padding: 1em;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
       }
       .output_msg_style {
         background: rgb(199, 80, 44);
@@ -105,7 +149,7 @@
       }
       @media (min-width: 40em) {
         .container {
-          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-columns: repeat(7, 1fr);
         }
       }
       .svg {
@@ -135,6 +179,10 @@
 
       let item1_input;
       let item2_input;
+      let item3_input;
+      let item4_input;
+      let item_flex_1_input;
+      let item_flex_2_input;
       let item_unique_input;
 
       document.getElementById("item1_input").addEventListener("input", ev => {
@@ -143,6 +191,23 @@
       document.getElementById("item2_input").addEventListener("input", ev => {
         item2_input = ev.target.value;
       });
+      document.getElementById("item3_input").addEventListener("input", ev => {
+        item3_input = ev.target.value;
+      });
+      document.getElementById("item4_input").addEventListener("input", ev => {
+        item4_input = ev.target.value;
+      });
+      document
+        .getElementById("item_flex_input")
+        .addEventListener("input", ev => {
+          item_flex_1_input = ev.target.value;
+        });
+      document
+        .getElementById("item_flex_input")
+        .addEventListener("input", ev => {
+          item_flex_2_input = ev.target.value;
+        });
+      //
       document
         .getElementById("item_unique_input")
         .addEventListener("input", ev => {
@@ -158,12 +223,21 @@
       async function getResult() {
         const item1_result_f = await item_result(item1_input);
         const item2_result_f = await item_result(item2_input);
+        const item3_result_f = await item_result(item3_input);
+        const item4_result_f = await item_result(item4_input);
+        const item_flex_1_input_f = await item_result(item_flex_1_input);
+        const item_flex_2_input_f = await item_result(item_flex_2_input);
         const item_unique_result_f = await item_result(item_unique_input);
 
         //Change Item Name Here
         const resultOBJ = {
           Pillow_Case: item1_result_f,
           Big_Towel: item2_result_f,
+          Hand_Towel: item3_result_f,
+          Bath_Mat: item4_result_f,
+          Bath_Robe: item_flex_1_input_f,
+          Slippers: item_flex_2_input_f,
+
           Room: item_unique_result_f,
         };
 
@@ -200,6 +274,16 @@
       document
         .getElementById("item2_input")
         .addEventListener("input", getResult);
+      document
+        .getElementById("item3_input")
+        .addEventListener("input", getResult);
+      document
+        .getElementById("item4_input")
+        .addEventListener("input", getResult);
+      document
+        .getElementById("item_flex_input")
+        .addEventListener("input", getResult);
+
       document
         .getElementById("item_unique_input")
         .addEventListener("input", getResult);
