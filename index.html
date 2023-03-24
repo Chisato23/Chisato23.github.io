@@ -127,6 +127,9 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
       }
+      #item_flex {
+        transform: translateX(-0.2em);
+      }
       .bgstyle_unique {
         background: rgb(118, 82, 186);
         padding: 1em;
@@ -147,11 +150,16 @@
         overflow: hidden;
         max-width: 100em;
       }
-      @media (min-width: 40em) {
+      @media (min-width: 600em) {
         .container {
           grid-template-columns: repeat(7, 1fr);
         }
       }
+      /* @media (max-width: 600em) {
+        .container {
+          grid-template-columns: repeat(7, 1fr);
+        }
+      } */
       .svg {
         display: inline-block;
         width: 30px;
@@ -176,7 +184,9 @@
       function setEle_innerHTML(id, text) {
         return (document.getElementById(id).innerHTML = text);
       }
+      let output_msg = getEle_innerHTML("output_msg");
 
+      //
       let item1_input;
       let item2_input;
       let item3_input;
@@ -197,6 +207,7 @@
       document.getElementById("item4_input").addEventListener("input", ev => {
         item4_input = ev.target.value;
       });
+      //drop down list items, need update to new value if item name changes
       document
         .getElementById("item_flex_input")
         .addEventListener("input", ev => {
@@ -208,13 +219,13 @@
           }
         });
 
-      //
       document
         .getElementById("item_unique_input")
         .addEventListener("input", ev => {
           item_unique_input = ev.target.value;
         });
 
+      //promise
       function item_result(id) {
         return new Promise((resolve, reject) => {
           resolve(id);
@@ -254,7 +265,6 @@
         return Promise.all(setEle_innerHTML("output_msg", resultARR));
       }
 
-      let output_msg = getEle_innerHTML("output_msg");
       //copy btn
       document
         .getElementById("copyResultText")
@@ -267,36 +277,20 @@
         navigator.clipboard.writeText(msg);
       }
 
-      //  getResult().then(console.log)
+      //
+      function input(item) {
+        document.getElementById(item).addEventListener("input", getResult);
+      }
 
-      document
-        .getElementById("item1_input")
-        .addEventListener("input", getResult);
-      document
-        .getElementById("item2_input")
-        .addEventListener("input", getResult);
-      document
-        .getElementById("item3_input")
-        .addEventListener("input", getResult);
-      document
-        .getElementById("item4_input")
-        .addEventListener("input", getResult);
-      document
-        .getElementById("item_flex_input")
-        .addEventListener("input", getResult);
-
-      document
-        .getElementById("item_unique_input")
-        .addEventListener("input", getResult);
+      input("item1_input");
+      input("item2_input");
+      input("item3_input");
+      input("item4_input");
+      input("item_flex_input");
+      input("item_unique_input");
 
       //check,tick icon
 
-      // document
-      //   .getElementById("copyResultText")
-      //   .addEventListener("click", () => {
-      //     document.getElementById("check_icon").classList.remove("svg");
-      //     console.log(document.getElementById("check_icon").classList);
-      //   });
       document
         .getElementById("copyResultText")
         .addEventListener("click", addClass);
@@ -307,8 +301,6 @@
           document.getElementById("check_icon").classList.remove("svg");
         }, 3000);
       }
-
-      // Later, add drop down list for items options
     </script>
   </body>
 </html>
