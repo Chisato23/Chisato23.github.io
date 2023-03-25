@@ -93,6 +93,9 @@
       </button>
     </div>
     <style>
+      body {
+        max-width: 800px;
+      }
       input[type="number"] {
         font-size: 2.5em;
         width: 2em;
@@ -150,16 +153,7 @@
         overflow: hidden;
         max-width: 100em;
       }
-      @media (min-width: 600em) {
-        .container {
-          grid-template-columns: repeat(7, 1fr);
-        }
-      }
-      /* @media (max-width: 600em) {
-        .container {
-          grid-template-columns: repeat(7, 1fr);
-        }
-      } */
+
       .svg {
         display: inline-block;
         width: 30px;
